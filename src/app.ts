@@ -18,7 +18,7 @@ async function main() {
   })
 }
 
-const stream = fs.createReadStream("../IMG_0009.PNG", 'binary')
+const stream = fs.createReadStream("IMG_0009.PNG", 'binary')
 
 slackEvents.on("link_shared", event => {
   void (async() => {
