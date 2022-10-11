@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import fs from 'fs'
-import {ChatUnfurlArguments, FilesRemoteAddArguments, WebClient} from '@slack/web-api'
-import {// ChatUnfurlArguments, FilesRemoteAddArguments, WebClient} from '@slack/web-api'
-import { createEventAdapter } from '@slack/events-api'
+import {FilesRemoteAddArguments, WebClient} from '@slack/web-api'
+// import {ChatUnfurlArguments, FilesRemoteAddArguments, WebClient} from '@slack/web-api'
 import { v4 as uuidv4 } from "uuid";
+import { createEventAdapter } from '@slack/events-api';
 
 
 const slackSigningSecret = process.env.SLACK_SIGNING_SECRET || "";

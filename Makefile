@@ -1,5 +1,5 @@
 start:
 	git pull
-	npm install
+	npm ci
 	npm run build
 	npm run start
