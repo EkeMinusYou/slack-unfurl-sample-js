@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import fs from 'fs'
-import {FilesRemoteAddArguments, WebClient} from '@slack/web-api'
-// import {ChatUnfurlArguments, FilesRemoteAddArguments, WebClient} from '@slack/web-api'
+import { ChatUnfurlArguments, FilesRemoteAddArguments, WebClient } from '@slack/web-api'
 import { v4 as uuidv4 } from "uuid";
 import { createEventAdapter } from '@slack/events-api';
 
@@ -14,16 +13,15 @@ const port = 80
 
 async function main() {
   await slackEvents.start(port).catch(error => {
-    console.log('server error: '+ String(error))
+    console.log('server error: ' + String(error))
   })
 }
 
-// const stream = fs.createReadStream("IMG_0009.PNG", 'binary')
 const buffer = fs.readFileSync("IMG_0009.PNG")
 
 slackEvents.on("link_shared", event => {
-  void (async() => {
-    console.log(`link_shared event: %o`,  event)
+  void (async () => {
+    console.log(`link_shared event: %o`, event)
     const client = new WebClient(slackToken)
 
     const externalId = uuidv4()
@@ -38,12 +36,18 @@ slackEvents.on("link_shared", event => {
     const filesRemoteAddResponse = await client.files.remote.add(filesRemoteAddArguments)
     console.log(`FilesRemoteAddResponse: %o`, filesRemoteAddResponse)
 
-    // const chatUnfurlArguments: ChatUnfurlArguments = {
-    //   channel: event.channel as string,
-    //   ts: event.message_ts as string,
-      // unfurls: LinkUnfurls,
-    // }
-    // await client.chat.unfurl(chatUnfurlArguments)
+    const chatUnfurlArguments: ChatUnfurlArguments = {
+      channel: event.channel as string,
+      ts: event.message_ts as string,
+      unfurls: {
+        'http://example.com': {
+          blocks: [{ type: 'file', source: "remote", external_id: filesRemoteAddResponse.file?.external_id }]
+        }
+      },
+    }
+    console.log(`chatUnfurlArguments: %o`, chatUnfurlArguments)
+    const chatUnfurlResponse = await client.chat.unfurl(chatUnfurlArguments)
+    console.log(`chatUnfurlResponse: %o`, chatUnfurlResponse)
   })().catch(error => {
     console.log(`%o`, error)
   })
