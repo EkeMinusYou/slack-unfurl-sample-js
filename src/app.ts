@@ -17,8 +17,4 @@ slackEvents.on("link_shared", event => {
   console.log(event)
 })
 
-slackEvents.on("url_verification", event => {
-  console.log(event)
-})
-
 void main()
