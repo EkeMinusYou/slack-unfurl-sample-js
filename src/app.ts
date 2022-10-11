@@ -22,7 +22,7 @@ const stream = fs.createReadStream("IMG_0009.PNG", 'binary')
 
 slackEvents.on("link_shared", event => {
   void (async() => {
-    console.log(`link_shared event: ${String(event)}`)
+    console.log(`link_shared event: %o`,  event)
     const client = new WebClient(slackToken)
 
     const externalId = uuidv4()
@@ -33,9 +33,9 @@ slackEvents.on("link_shared", event => {
       filetype: 'png',
       preview_image: stream,
     }
-    console.log(`filesRemoteAddArguments: ${String(filesRemoteAddArguments)}`)
+    console.log(`filesRemoteAddArguments: %o`, filesRemoteAddArguments)
     const filesRemoteAddResponse = await client.files.remote.add(filesRemoteAddArguments)
-    console.log(`FilesRemoteAddResponse: ${String(filesRemoteAddResponse)}`)
+    console.log(`FilesRemoteAddResponse: %o`, filesRemoteAddResponse)
 
     // const chatUnfurlArguments: ChatUnfurlArguments = {
     //   channel: event.channel as string,
