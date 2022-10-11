@@ -18,7 +18,8 @@ async function main() {
   })
 }
 
-const stream = fs.createReadStream("IMG_0009.PNG", 'binary')
+// const stream = fs.createReadStream("IMG_0009.PNG", 'binary')
+const buffer = fs.readFileSync("IMG_0009.PNG")
 
 slackEvents.on("link_shared", event => {
   void (async() => {
@@ -31,7 +32,7 @@ slackEvents.on("link_shared", event => {
       external_url: 'http://example.com',
       external_id: externalId,
       filetype: 'png',
-      preview_image: stream,
+      preview_image: buffer,
     }
     console.log(`filesRemoteAddArguments: %o`, filesRemoteAddArguments)
     const filesRemoteAddResponse = await client.files.remote.add(filesRemoteAddArguments)
