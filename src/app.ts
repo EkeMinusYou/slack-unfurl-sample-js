@@ -43,7 +43,9 @@ slackEvents.on("link_shared", event => {
       // unfurls: LinkUnfurls,
     // }
     // await client.chat.unfurl(chatUnfurlArguments)
-  })()
+  })().catch(error => {
+    console.log(`%o`, error)
+  })
 })
 
 void main()
