@@ -5,7 +5,7 @@ const slackSigningSecret = process.env.SLACK_SIGNING_SECRET || "";
 // const slackToken = process.env.SLACK_TOKEN || "";
 const slackEvents = createEventAdapter(slackSigningSecret)
 
-const port = 80
+const port = 8080
 
 async function main() {
   // const client = new WebClient(slackToken)
