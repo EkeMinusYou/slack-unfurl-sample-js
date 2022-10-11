@@ -5,7 +5,7 @@ const slackSigningSecret = process.env.SLACK_SIGNING_SECRET || "";
 // const slackToken = process.env.SLACK_TOKEN || "";
 const slackEvents = createEventAdapter(slackSigningSecret)
 
-const port = 8080
+const port = 80
 
 async function main() {
   // const client = new WebClient(slackToken)
@@ -14,6 +14,10 @@ async function main() {
 }
 
 slackEvents.on("link_shared", event => {
+  console.log(event)
+})
+
+slackEvents.on("url_verification", event => {
   console.log(event)
 })
 
