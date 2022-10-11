@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import fs from 'fs'
-import {FilesRemoteAddArguments, WebClient} from '@slack/web-api'
-// import {ChatUnfurlArguments, FilesRemoteAddArguments, WebClient} from '@slack/web-api'
+import {ChatUnfurlArguments, FilesRemoteAddArguments, WebClient} from '@slack/web-api'
+import {// ChatUnfurlArguments, FilesRemoteAddArguments, WebClient} from '@slack/web-api'
 import { createEventAdapter } from '@slack/events-api'
 import { v4 as uuidv4 } from "uuid";
 
@@ -18,7 +18,7 @@ async function main() {
   })
 }
 
-const stream = fs.createReadStream("IMG_0009.PNG", 'binary')
+const stream = fs.createReadStream("../IMG_0009.PNG", 'binary')
 
 slackEvents.on("link_shared", event => {
   void (async() => {
